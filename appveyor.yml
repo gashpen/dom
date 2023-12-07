@@ -1,20 +1,54 @@
-image: Ubuntu1804  # образ для сборки
+name: Netology AHJ
 
-stack: node 16 # окружение
+on: [push, pull_request]
 
-branches:
-  only:
-    - master  # ветка git
+# Down scope as necessary via https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token
+permissions:
+  checks: write
+  contents: write
+  pages: write
+  id-token: write
+  deployments: write
 
-cache: node_modules  # кеширование
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
-install:
-  - npm install  # команда установки зависимостей
+    strategy:
+      matrix:
+        node-version: [18.x]
 
-build: off  # отключаем встроенную в appveyor систему сборки
+    steps:
+      - uses: actions/checkout@v3
 
-build_script:
-  - npm run build   # команда сборки
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
 
-test_script:
-  - npm run lint && npm test  # скрипт тестирования
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run linters
+        run: npm run lint
+
+      - name: Run test
+        run: npm run coverage
+
+      - name: Build
+        run: npm run build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: 'dist'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1

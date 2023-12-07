@@ -1,5 +1,7 @@
 ![CI](https://github.com/gashpen/dom/actions/workflows/web.yml/badge.svg)
 
+https://gashpen.github.io/dom/
+
 
 
 # Домашнее задание к занятию "2. DOM"
