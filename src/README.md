@@ -1,3 +1,7 @@
+![CI](https://github.com/gashpen/dom/actions/workflows/web.yml/badge.svg)
+
+
+
 # Домашнее задание к занятию "2. DOM"
 
 Правила сдачи задания:
