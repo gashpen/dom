@@ -6,9 +6,7 @@ export default class FieldWidget {
 
   addMuzzle() {
     const fieldBlock = this._element.querySelectorAll('.field_block');
-
     const index = Math.floor(Math.random() * fieldBlock.length);
-
     fieldBlock[index].classList.add('active');
   }
 

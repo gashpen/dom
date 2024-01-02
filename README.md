@@ -1,4 +1,5 @@
-![CI](https://github.com/gashpen/dom/actions/workflows/web.yml/badge.svg)
+
+[![Build status](https://ci.appveyor.com/api/projects/status/9dx0c4xus2549c70?svg=true)](https://ci.appveyor.com/project/gashpen/DOM)
 
 https://gashpen.github.io/dom/
 
